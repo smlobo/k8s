@@ -1,0 +1,6 @@
+
+Tutorial:
+https://kubernetes.io/docs/tutorials/stateful-application/cassandra/
+
+% ./cqlsh-astra/bin/cqlsh 10.1.1.42 9042
+

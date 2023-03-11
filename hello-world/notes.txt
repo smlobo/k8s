@@ -1,0 +1,9 @@
+
+
+# Deploy hello world
+% kubectl apply -f https://k8s.io/examples/service/load-balancer-example.yaml
+
+# Expose the deployment as a service
+% kubectl expose deployment hello-world --type=LoadBalancer --name=my-service
+
+

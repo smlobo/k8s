@@ -1,0 +1,2 @@
+% kubectl expose deployment cassandra-client --type=LoadBalancer --name=cassandra-client
+

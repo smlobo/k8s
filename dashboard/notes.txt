@@ -1,0 +1,19 @@
+
+% kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+
+Create a user:
+https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
+
+NOTE: Above did not work
+
+% microk8s enable dashboard
+% microk8s kubectl create token default
+
+# port forward on remote machine
+% kubectl port-forward -n kube-system service/kubernetes-dashboard 10443:443
+
+OR
+
+# expose the service
+% kubectl expose deployment -n kube-system kubernetes-dashboard --type=LoadBalancer --name=dashboard-service
+

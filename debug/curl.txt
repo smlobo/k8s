@@ -1,0 +1,4 @@
+
+  870  [2023-03-11 22:29:37] kubectl run curl --image=radial/busyboxplus:curl -i --tty
+  872  [2023-03-11 22:47:31] kubectl attach curl -c curl -i -t
+

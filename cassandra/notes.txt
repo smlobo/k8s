@@ -4,3 +4,15 @@ https://kubernetes.io/docs/tutorials/stateful-application/cassandra/
 
 % ./cqlsh-astra/bin/cqlsh 10.1.1.42 9042
 
+{History is in ~/.cassandra/cqlsh_history}
+
+Some interesting ones:
+cqlsh> use cycling ;
+cqlsh> CREATE TABLE cycling.cyclist_alt_stats ( id UUID PRIMARY KEY, lastname text, birthday timestamp, nationality text, weight text, height text );
+cqlsh> DESC cyclist_alt_stats ;
+cqlsh> INSERT INTO cyclist_alt_stats (id, birthday, height, lastname, nationality, weight) values (980c881a-eda5-4e24-84b2-2be718ce3620, '2003-01-22', '158cm', 'Amelia', 'USA', '130');
+
+% ./cqlsh-astra/bin/cqlsh 10.1.1.42 9042 -e 'paging off; select country_long, city from lobo_codes.amelia limit 10000' 
+
+% ./cqlsh-astra/bin/cqlsh 10.1.1.42 9042 -e "select count(user_agent) from lobo_codes.domain; select count(user_agent) from lobo_codes.amelia; select count(user_agent) from lobo_codes.ryan; select count(user_agent) from lobo_codes.sheldon;" > lobo_codes.log
+

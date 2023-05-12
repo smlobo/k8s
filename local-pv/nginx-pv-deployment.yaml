@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: nginx-pv-deployment
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-server
+  template:
+    metadata:
+      labels:
+        app: nginx-server
+    spec:
+      volumes:
+        - name: nginx-pv-storage
+          persistentVolumeClaim:
+            claimName: local-pvc-srv-k8ssandra
+      containers:
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 80
+              name: "nginx-server"
+          volumeMounts:
+            - mountPath: "/usr/share/nginx/html"
+              name: nginx-pv-storage
+

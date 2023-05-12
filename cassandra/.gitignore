@@ -1,0 +1,7 @@
+
+# Mac installation of cqlsh-astra
+cqlsh-astra
+
+# logs
+lobo_codes.*.log
+

@@ -1,4 +1,41 @@
 
+Restarting nodes
+~~~~~~~~~~~~~~~~
+
+The main issue is Cassandra StatefulSet shutting down gracefully. The following worked:
+
+1. Scale the StatefulSet down to 1.
+   % kubectl edit statefulsets.apps cassandra
+
+2. Restart the other 2 nodes:
+   % kubectl drain NODE-NAME --ignore-daemonsets --delete-emptydir-data
+   % ssh NODE-NAME
+   % microk8s stop
+   % reboot
+   % microk8s start
+
+3. Scale the StatefulSet back to 3 and make sure Cassandra is happy
+   % kubectl exec -it cassandra-0 -- nodetool status
+   % kubectl exec -it cassandra-0 -- nodetool repair
+
+4. Take Cassandra offline; Edit the StatefulSet to 0 replicas
+   % kubectl edit statefulsets.apps cassandra
+
+5. Drain the remaining node:
+   % kubectl drain NODE-NAME --ignore-daemonsets --delete-emptydir-data
+
+6. Scale the StatefulSet up to 2; make sure Cassandra is back up
+
+7. Reboot the remaining node:
+   % ssh NODE-NAME
+   % microk8s stop
+   % reboot
+   % microk8s start
+
+8. Scale the StatefulSet back up to 3
+
+=======================================================
+
 Tutorial:
 https://kubernetes.io/docs/tutorials/stateful-application/cassandra/
 
@@ -13,6 +50,18 @@ cqlsh> DESC cyclist_alt_stats ;
 cqlsh> INSERT INTO cyclist_alt_stats (id, birthday, height, lastname, nationality, weight) values (980c881a-eda5-4e24-84b2-2be718ce3620, '2003-01-22', '158cm', 'Amelia', 'USA', '130');
 
 % ./cqlsh-astra/bin/cqlsh 10.1.1.42 9042 -e 'paging off; select country_long, city from lobo_codes.amelia limit 10000' 
+% ./cqlsh-astra/bin/cqlsh 10.1.1.42 9042 -e 'paging off; select * from lobo_codes.domain limit 10000' > ../../golang/k8s-http-server/cassandra-backup-20230514/domain.backup.20230514
 
 % ./cqlsh-astra/bin/cqlsh 10.1.1.42 9042 -e "select count(user_agent) from lobo_codes.domain; select count(user_agent) from lobo_codes.amelia; select count(user_agent) from lobo_codes.ryan; select count(user_agent) from lobo_codes.sheldon;" > lobo_codes.log
+
+nodetool
+~~~~~~~~
+
+  636  [2023-05-07 21:53:20] kubectl exec -it cassandra-0 -- nodetool tablestats
+  640  [2023-05-07 22:05:13] kubectl exec -it cassandra-0 -- nodetool status
+  909  [2023-05-13 23:37:15] kubectl exec -it cassandra-2 -- nodetool describecluster
+  938  [2023-05-13 23:59:24] kubectl exec -it cassandra-1 -- nodetool ring
+  939  [2023-05-14 00:00:15] kubectl exec -it cassandra-1 -- nodetool repair
+  940  [2023-05-14 00:00:38] kubectl exec -it cassandra-1 -- nodetool repair -pr
+  941  [2023-05-14 00:00:57] kubectl exec -it cassandra-1 -- nodetool compactionstats
 

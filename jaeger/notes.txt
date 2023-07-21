@@ -1,0 +1,3 @@
+kubectl create namespace observability
+kubectl create -f jaeger-operator.yaml -n observability
+

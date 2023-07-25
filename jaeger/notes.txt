@@ -1,3 +1,7 @@
 kubectl create namespace observability
 kubectl create -f jaeger-operator.yaml -n observability
 
+# Jaeger all-in-one simplest
+% kubectl apply -f ./jaeger-all-in-one.yaml
+% kubectl apply -f jaeger-query-loadbalancer.yaml
+

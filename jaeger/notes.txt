@@ -5,3 +5,8 @@ kubectl create -f jaeger-operator.yaml -n observability
 % kubectl apply -f ./jaeger-all-in-one.yaml
 % kubectl apply -f jaeger-query-loadbalancer.yaml
 
+# Jaeger all-in-one cassandra
+% kubectl apply -f jaeger-cassandra-schema.yaml     # ONE time
+% kubectl apply -f jaeger-cassandra.yaml
+% kubectl delete service jaeger-cassandra-query
+% kubectl apply -f ./jaeger-cassandra-query-lb.yaml

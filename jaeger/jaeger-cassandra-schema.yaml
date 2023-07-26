@@ -1,0 +1,20 @@
+apiVersion: jaegertracing.io/v1
+
+kind: Jaeger
+
+metadata:
+  name: jaeger-cassandra-schema
+  # namespace: observability
+
+spec:
+  strategy: allInOne
+  storage:
+    type: cassandra
+    options:
+      cassandra:
+        servers: cassandra-internal
+        keyspace: jaeger
+    cassandraCreateSchema:
+      datacenter: "DC1-K8Demo"
+      mode: "prod"
+

@@ -39,6 +39,9 @@ The main issue is Cassandra StatefulSet shutting down gracefully. The following 
 Tutorial:
 https://kubernetes.io/docs/tutorials/stateful-application/cassandra/
 
+CQL
+~~~
+
 % ./cqlsh-astra/bin/cqlsh 10.1.1.42 9042
 
 {History is in ~/.cassandra/cqlsh_history}
@@ -53,6 +56,10 @@ cqlsh> INSERT INTO cyclist_alt_stats (id, birthday, height, lastname, nationalit
 % ./cqlsh-astra/bin/cqlsh 10.1.1.42 9042 -e 'paging off; select * from lobo_codes.domain limit 10000' > ../../golang/k8s-http-server/cassandra-backup-20230514/domain.backup.20230514
 
 % ./cqlsh-astra/bin/cqlsh 10.1.1.42 9042 -e "select count(user_agent) from lobo_codes.domain; select count(user_agent) from lobo_codes.amelia; select count(user_agent) from lobo_codes.ryan; select count(user_agent) from lobo_codes.sheldon;" > lobo_codes.log
+
+cqlsh> desc KEYSPACES ;
+cqlsh> desc tables;
+
 
 nodetool
 ~~~~~~~~

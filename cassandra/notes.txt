@@ -13,6 +13,7 @@ The main issue is Cassandra StatefulSet shutting down gracefully. The following 
    % microk8s stop
    % reboot
    % microk8s start
+   % kubectl uncordon NODE-NAME
 
 3. Scale the StatefulSet back to 3 and make sure Cassandra is happy
    % kubectl exec -it cassandra-0 -- nodetool status
@@ -31,6 +32,7 @@ The main issue is Cassandra StatefulSet shutting down gracefully. The following 
    % microk8s stop
    % reboot
    % microk8s start
+   % kubectl uncordon NODE-NAME
 
 8. Scale the StatefulSet back up to 3
 

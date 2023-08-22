@@ -1,0 +1,14 @@
+apiVersion: v1
+
+kind: Service
+
+metadata:
+  name: nginx-pv-service
+
+spec:
+  ports:
+    - port: 80
+      name: http
+  selector:
+    app: nginx-server
+  type: LoadBalancer

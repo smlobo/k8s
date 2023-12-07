@@ -42,7 +42,7 @@ spec:
         - name: rqlite-file
           mountPath: /rqlite/file
       volumes:
-        - name: rqlite-pv-storage
+        - name: rqlite-file
           persistentVolumeClaim:
-            claimName: locl-pvc-srv-k8ssandra
+            claimName: local-pvc-srv-k8ssandra
 

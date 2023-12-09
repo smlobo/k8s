@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rqlite
+
+spec:
+  ports:
+    - port: 4001
+  selector:
+    app: rqlite
+  type: LoadBalancer
+

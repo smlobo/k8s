@@ -1,0 +1,4 @@
+
+# Record rqlite tables
+% curl -s -X POST 'http://10.1.1.44:4001/db/query' -d @count-query.json | jq '. | .results[] | .values | .[] | .[]'
+

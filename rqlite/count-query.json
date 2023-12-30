@@ -1,0 +1,7 @@
+[
+    "select count(*) from domain",
+    "select count(*) from amelia",
+    "select count(*) from ryan",
+    "select count(*) from sheldon",
+    "select count(*) from bliu"
+]

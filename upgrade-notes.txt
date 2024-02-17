@@ -1,0 +1,15 @@
+
+# Upgrading microk8s should be done 1 node at a time.
+
+4 node cluster; 3 node rqlite
+
+   % kubectl drain NODE-NAME --ignore-daemonsets --delete-emptydir-data
+   % ssh NODE-NAME
+   % sudo apt update
+   % sudo apt upgrade
+   % microk8s stop
+   % sudo snap refresh microk8s --channel=1.27/stable
+   % sudo reboot now
+   % microk8s start
+   % kubectl uncordon NODE-NAME
+

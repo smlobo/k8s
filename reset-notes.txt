@@ -1,0 +1,35 @@
+
+# If microk8s is broken, can always start from scratch
+
+sudo snap remove microk8s
+sudo snap install microk8s --classic
+
+sudo microk8s start
+microk8s enable hostpath-storage
+microk8s enable ingress
+> 10.1.1.40-10.1.1.49
+microk8s enable metallb
+microk8s enable registry
+
+microk8s status
+microk8s add-node
+microk8s join 10.1.1.70:25000/43542768abca9c45b692587af7ed9f45/8e83d849cb00
+
+microk8s config > microk8s.macbook-air-2013.config
+...
+
+# Persistent volumes are used by rqlite alone. Starting this up should work
+
+kubectl apply -f local-pv.srv-k8ssandra.yaml
+kubectl apply -f pvc.srv-k8ssandra.yaml
+
+# Test with the nginx deployment
+kubectl apply -f nginx-pv-deployment.yaml
+kubectl apply -f nginx-pv-service.yaml
+curl 10.1.1.4x
+
+# Startup & test rqlite
+kubectl apply -f rqlite-service.yaml
+kubectl apply -f rqlite/statefulset-3-node.yaml
+kubectl apply -f ./rqlite-service-lb.yaml
+curl -s -X POST 'http://10.1.1.4X:4001/db/query' -d @count-query.json | jq '. | .results[] | .values | .[] | .[]'

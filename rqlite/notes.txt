@@ -3,5 +3,11 @@
 # Odd number of nodes are more efficient
 
 # Record rqlite tables
-% curl -s -X POST 'http://10.1.1.44:4001/db/query' -d @count-query.json | jq '. | .results[] | .values | .[] | .[]'
+% curl -s -X POST 'http://10.10.1.41:4001/db/query' -d @count-query.json | jq '. | .results[] | .values | .[] | .[]'
+
+# Data stored at (??; does not match query above, or backup below. Needs flush?):
+% ls /srv/k8ssandra/data/db.sqlite
+
+# Backup
+% curl -s -X GET 'http://10.10.1.41:4001/db/backup' -o rqlite.20240602.db
 

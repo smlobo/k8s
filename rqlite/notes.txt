@@ -11,3 +11,10 @@
 # Backup
 % curl -s -X GET 'http://10.10.1.41:4001/db/backup' -o rqlite.20240602.db
 
+# Restore
+% rqlite -H 10.10.1.41
+Welcome to the rqlite CLI.
+Enter ".help" for usage hints.
+Connected to http://10.10.1.41:4001 running version v8.26.2
+10.10.1.41:4001> .restore rqlite.20240629.sqlite3
+

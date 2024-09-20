@@ -3,5 +3,7 @@
     "select count(*) from amelia",
     "select count(*) from ryan",
     "select count(*) from sheldon",
-    "select count(*) from bliu"
+    "select count(*) from bliu",
+    "select count(*) from wasm",
+    "select count(*) from 'test-vue'"
 ]

@@ -18,3 +18,7 @@ Enter ".help" for usage hints.
 Connected to http://10.10.1.41:4001 running version v8.26.2
 10.10.1.41:4001> .restore rqlite.20240629.sqlite3
 
+# Create new table for subdomain
+10.10.1.41:4001> .schema
+10.10.1.41:4001>  CREATE TABLE hikes (id INTEGER NOT NULL PRIMARY KEY, created_at datetime, updated_at datetime, remote_address TEXT, user_agent TEXT, count INTEGER, country_short TEXT, country_long TEXT, region TEXT, city TEXT, latitude REAL, longitude REAL, zipcode TEXT, timezone TEXT, elevation REAL)
+

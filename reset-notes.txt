@@ -1,3 +1,48 @@
+# Notes from the 20251030 restart from scratch
+
+# To restart from scratch
+
+sudo microk8s leave
+sudo microk8s reset
+sudo microk8s start
+
+# First rejoin cluster
+microk8s add-node
+microk8s join 10.10.1.XX:...
+
+microk8s enable hostpath-storage
+microk8s enable ingress
+microk8s enable metallb		# LB needed for external access
+> 10.1.1.40-10.1.1.49
+microk8s enable registry
+microk8s enable dns		# DNS needed by rqlite (and internal services?)
+
+microk8s config > microk8s.macbook-air-2013.config
+
+kubectl apply -f local-pv.srv-k8ssandra.yaml
+kubectl apply -f pvc.srv-k8ssandra.yaml
+
+kubectl apply -f nginx-pv-deployment.yaml
+kubectl apply -f nginx-pv-service.yaml
+curl 10.1.1.4x
+
+kubectl apply -f rqlite-service.yaml
+kubectl apply -f rqlite-service-lb.yaml
+
+# rqlite was broken. Fixed by:
+curl -s -X GET 'http://10.10.1.41:4001/db/backup' -o rqlite.20251030.sqlite3
+rm -rf /srv/k8sandra/data	# x 3
+kubectl apply -f statefulset-3-node.yaml
+rqlite -H 10.10.1.41
+> .restore rqlite.20251030.sqlite3
+
+# Note: Check sqlite3 data in rqlite
+sqlite3 /srv/k8ssandra/data/	# x 3
+
+# verify
+kubectl logs -f rqlite-0	# x 3
+curl -s -X POST 'http://10.1.1.4X:4001/db/query' -d @count-query.json | jq '. | .results[] | .values | .[] | .[]'
+
 
 # If microk8s is broken, can always start from scratch
 

@@ -1,0 +1,5 @@
+apiVersion: v2
+name: nginx-helm
+description: A simple hello world deployment using Nginx
+version: 1.0.0
+appVersion: "1.0.0"

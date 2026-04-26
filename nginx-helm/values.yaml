@@ -1,0 +1,15 @@
+replicaCount: 3
+
+serviceName: nginx-helm-service
+deploymentName: nginx-helm-deployment
+
+image:
+  repository: nginx
+  tag: latest
+
+service:
+  type: LoadBalancer
+  port: 80
+  targetPort: 80
+  nodePort: 30080 # The external port on the host machine
+

@@ -23,3 +23,11 @@ spec:
         ports:
         - name: http
           containerPort: {{ .Values.service.targetPort }}
+        volumeMounts:
+        - mountPath: {{ .Values.service.mountPath }}
+          name: {{ .Values.pvName }}
+      volumes:
+        - name: {{ .Values.pvName }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.pvClaimName }}
+

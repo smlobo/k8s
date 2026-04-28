@@ -2,6 +2,8 @@ replicaCount: 3
 
 serviceName: nginx-helm-service
 deploymentName: nginx-helm-deployment
+pvName: nginx-helm-pv-storageame
+pvClaimName: local-pvc-srv-k8ssandra
 
 image:
   repository: nginx
@@ -11,5 +13,5 @@ service:
   type: LoadBalancer
   port: 80
   targetPort: 80
-  nodePort: 30080 # The external port on the host machine
+  mountPath: "/usr/share"
 

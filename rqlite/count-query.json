@@ -1,10 +1,10 @@
 [
-    "select count(*) from domain",
-    "select count(*) from amelia",
-    "select count(*) from ryan",
-    "select count(*) from sheldon",
-    "select count(*) from bliu",
-    "select count(*) from wasm",
-    "select count(*) from 'test-vue'",
-    "select count(*) from hikes"
+    "select 'domain' as table_name, count(*) as row_count from domain",
+    "select 'amelia' as table_name, count(*) as row_count from amelia",
+    "select 'ryan' as table_name, count(*) as row_count from ryan",
+    "select 'sheldon' as table_name, count(*) as row_count from sheldon",
+    "select 'bliu' as table_name, count(*) as row_count from bliu",
+    "select 'wasm' as table_name, count(*) as row_count from wasm",
+    "select 'test-vue' as table_name, count(*) as row_count from \"test-vue\"",
+    "select 'hikes' as table_name, count(*) as row_count from hikes"
 ]

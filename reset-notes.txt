@@ -1,8 +1,10 @@
-# Notes from the 20251030 restart from scratch
+# Notes from the 20251030 restart from scratch (and 20260623)
 
 # To restart from scratch
 
 sudo microk8s leave
+microk8s remove-node lenovo-t420
+microk8s remove-node macbook-air-2013
 sudo microk8s reset
 sudo microk8s start
 

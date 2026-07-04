@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"PersistentVolumeClaim","metadata":{"annotations":{},"name":"local-pvc-srv-k8ssandra","namespace":"default"},"spec":{"accessModes":["ReadWriteMany"],"resources":{"requests":{"storage":"10Gi"}},"storageClassName":"manual","volumeName":"local-vol-srv-k8ssandra"}}
+    pv.kubernetes.io/bind-completed: "yes"
+  creationTimestamp: "2025-10-30T13:31:57Z"
+  finalizers:
+  - kubernetes.io/pvc-protection
+  name: local-pvc-srv-k8ssandra
+  namespace: default
+  resourceVersion: "4503"
+  uid: a80e5122-4ba3-4c91-8137-d6fd5b502d1a
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: manual
+  volumeMode: Filesystem
+  volumeName: local-vol-srv-k8ssandra
+status:
+  accessModes:
+  - ReadWriteOnce
+  - ReadWriteMany
+  capacity:
+    storage: 10Gi
+  phase: Bound

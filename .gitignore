@@ -6,6 +6,7 @@
 *.tfstate
 *.tfstate.*
 .terraform
+.terraform.lock.hcl
 
 # Python
 __pycache__

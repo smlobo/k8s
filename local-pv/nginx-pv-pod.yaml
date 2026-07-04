@@ -6,7 +6,7 @@ spec:
   volumes:
     - name: nginx-pv-storage
       persistentVolumeClaim:
-        claimName: local-pvc
+        claimName: local-pvc-srv-k8ssandra
   containers:
     - name: nginx
       image: nginx

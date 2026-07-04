@@ -22,13 +22,13 @@ provider "kubernetes" {
 # }
 
 variable "namespace" {
-  type = string
+  type    = string
   default = "default"
 }
 
 resource "kubernetes_deployment" "nginx" {
   metadata {
-    name      = "nginx-pv-deployment-tf"
+    name = "nginx-pv-deployment-tf"
     # namespace = kubernetes_namespace.demo.metadata[0].name
     namespace = var.namespace
     labels = {
@@ -62,7 +62,7 @@ resource "kubernetes_deployment" "nginx" {
           }
           volume_mount {
             mount_path = "/usr/share/nginx"
-            name = "nginx-pv-storage-tf"
+            name       = "nginx-pv-storage-tf"
           }
         }
         volume {
@@ -78,7 +78,7 @@ resource "kubernetes_deployment" "nginx" {
 
 resource "kubernetes_service" "nginx" {
   metadata {
-    name      = "nginx-pv-service-tf"
+    name = "nginx-pv-service-tf"
     # namespace = kubernetes_namespace.demo.metadata[0].name
     namespace = var.namespace
   }
